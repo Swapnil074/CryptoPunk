@@ -7,12 +7,12 @@ import postsRouter from "./routes/posts.js"; // importing the postsRouter
 
 const app = express(); // creating an express app
 
-app.use("/posts", postsRouter); // using the postsRouter
-
 //setting bodyparsers so that we can easily send our requests
 app.use(bodyParser.json({ limit: "30mb", extended: "true" })); //limit size of json
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" })); //limit size of url
 app.use(cors());
+
+app.use("/posts", postsRouter); // using the postsRouter
 
 const CONNECTION_URL =
   "mongodb+srv://Swapnil:CryptoPunk_2301@cluster0.uasnq.mongodb.net/CRYPTOPUNK?retryWrites=true&w=majority";

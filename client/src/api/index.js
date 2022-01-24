@@ -2,6 +2,6 @@ import axios from "axios"; //axios is a promise based HTTP client for the browse
 
 const url = "http://localhost:5000/posts";
 
-const fetchPosts = async () => {
+export const fetchPosts = async () => {
   axios.get(url).then((res) => console.log(res.data));
 };
