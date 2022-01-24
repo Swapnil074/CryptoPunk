@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import useStyles from "./styles.js";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64"; //FileBase is a react component that allows you to upload files to the server
+import { useDispatch } from "react-redux";
+import { createPost } from "../../actions/posts.js";
 
 export default function Form() {
   const [postData, setPostData] = useState({
@@ -11,8 +13,15 @@ export default function Form() {
     tags: "",
     selectedFile: "",
   });
+
   const classes = useStyles();
-  const handleSubmit = () => {};
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // to avoid refresh in the browser
+    dispatch(createPost(postData)); // dispatch the action to the reducer to create the post
+  };
+
   const clear = () => {};
 
   return (
@@ -68,7 +77,7 @@ export default function Form() {
           <FileBase
             type="file"
             multiple={false}
-            onDone={(base64) =>
+            onDone={({ base64 }) =>
               setPostData({ ...postData, selectedFile: base64 })
             }
           />
