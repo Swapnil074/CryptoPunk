@@ -5,7 +5,7 @@ import FileBase from "react-file-base64"; //FileBase is a react component that a
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../actions/posts.js";
 
-export default function Form() {
+export default function Form({ currentId, setCurrentId }) {
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
