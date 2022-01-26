@@ -1,6 +1,10 @@
 //For all the handlers
 //extracted functionality from the route to make it a pure function
+import express from "express";
+import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
+
+const router = express.Router();
 
 export const getPosts = async (req, res) => {
   try {
@@ -25,13 +29,15 @@ export const createPost = async (req, res) => {
 };
 
 export const updatePost = async (req, res) => {
-  const { id: _id } = req.params;
-  const post = req.body;
-  if (!mongoose.types.objecId.isValid(_id))
-    return res.status(400).json({ message: "invalid id" });
+  const { id } = req.params;
+  const { title, message, creator, selectedFile, tags } = req.body;
 
-  const updatedPost = await PostMessage.findByIdAndUpdate(_id, post, {
-    new: true,
-  });
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send(`No post with id: ${id}`);
+
+  const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
+
+  await PostMessage.findByIdAndUpdate(id, updatedPost, { new: true });
+
   res.json(updatedPost);
 };

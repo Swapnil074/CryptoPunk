@@ -5,3 +5,5 @@ const url = "http://localhost:5000/posts";
 export const fetchPosts = () => axios.get(url);
 
 export const createPost = (newpost) => axios.post(url, newpost);
+export const updatePost = (id, postData) =>
+  axios.patch(`${url}/${id}`, postData);

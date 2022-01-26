@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     //useEffect is a hook that allows us to run code after a component mounts
     dispatch(getPosts()); //dispatch the action
-  }, [dispatch]); //passing an empty array as a second argument will run the effect only once
+  }, [currentId, dispatch]); //passing an empty array as a second argument will run the effect only once
 
   return (
     <Container maxWidth="lg">
