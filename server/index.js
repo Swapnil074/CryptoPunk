@@ -4,8 +4,9 @@ import mongoose from "mongoose"; // MongoDB object modeling tool designed to wor
 import cors from "cors"; // node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options
 
 import postsRouter from "./routes/posts.js"; // importing the postsRouter
-
+import dotenv from "dotenv";
 const app = express(); // creating an express app
+dotenv.config(); // loading the .env file
 
 //setting bodyparsers so that we can easily send our requests
 app.use(bodyParser.json({ limit: "30mb", extended: "true" })); //limit size of json
@@ -14,8 +15,7 @@ app.use(cors());
 
 app.use("/posts", postsRouter); // using the postsRouter
 
-const CONNECTION_URL =
-  "mongodb+srv://Swapnil:CryptoPunk_2301@cluster0.uasnq.mongodb.net/CRYPTOPUNK?retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.PORT || 5000; //setting port
 
 mongoose

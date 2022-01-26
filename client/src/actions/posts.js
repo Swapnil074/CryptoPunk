@@ -1,10 +1,17 @@
 import * as api from "../api";
+import {
+  CREATE,
+  FETCH_ALL,
+  LIKE,
+  UPDATE,
+  DELETE,
+} from "../constants/actionTypes";
 
 //Action creators are functions that return action objects
 export const getPosts = () => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts(); //gets the data from the api and storing it in data
-    dispatch({ type: "FETCH_ALL", payload: data }); //dispatch the action with data as payload, payload is the data that we want to send to the reducer
+    dispatch({ type: FETCH_ALL, payload: data }); //dispatch the action with data as payload, payload is the data that we want to send to the reducer
   } catch (error) {
     console.log(error.message);
   }
@@ -13,7 +20,7 @@ export const getPosts = () => async (dispatch) => {
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post); //sending the new post to the api and storing it in data
-    dispatch({ type: "CREATE", payload: data }); //dispatch the action with data as payload
+    dispatch({ type: CREATE, payload: data }); //dispatch the action with data as payload
   } catch (error) {
     console.log(error);
   }
@@ -22,7 +29,7 @@ export const createPost = (post) => async (dispatch) => {
 export const updatePost = (id, postData) => async (dispatch) => {
   try {
     const { data } = await api.updatePost(id, postData); // updating the post with the id and the postData
-    dispatch({ type: "UPDATE", payload: data }); //dispatch the action with data as payload
+    dispatch({ type: UPDATE, payload: data }); //dispatch the action with data as payload
   } catch (error) {
     console.log(error);
   }
@@ -32,7 +39,7 @@ export const deletePost = (id) => async (dispatch) => {
   try {
     await api.deletePost(id);
 
-    dispatch({ type: "DELETE", payload: id });
+    dispatch({ type: DELETE, payload: id });
   } catch (error) {
     console.log(error.message);
   }
@@ -41,7 +48,7 @@ export const deletePost = (id) => async (dispatch) => {
 export const likePost = (id) => async (dispatch) => {
   try {
     const { data } = await api.likePost(id); //updating the post with the id
-    dispatch({ type: "LIKE", payload: data }); //dispatch the action with data as payload
+    dispatch({ type: LIKE, payload: data }); //dispatch the action with data as payload
   } catch (error) {
     console.log(error);
   }
