@@ -14,12 +14,17 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" })); //limit siz
 app.use(cors());
 
 app.use("/posts", postsRouter); // using the postsRouter
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 
-const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.PORT || 5000; //setting port
 
 mongoose
-  .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }) //connecting to the database
+  .connect(process.env.CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }) //connecting to the database
   .then(() =>
     app.listen(PORT, () => console.log(`server running on port: ${PORT}`))
   ) //listening to the port
