@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useStyles from "./styles.js";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64"; //FileBase is a react component that allows you to upload files to the server
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../actions/posts.js";
 
 export default function Form() {

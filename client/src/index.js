@@ -7,6 +7,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 //compose allows us to use multiple middleware
 import thunk from "redux-thunk"; //allows us to use async actions
 import reducers from "./reducers";
+import "./index.css";
 
 import App from "./App";
 
